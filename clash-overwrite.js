@@ -83,6 +83,13 @@ function main(config) {
         "path": "./ruleset/telegram.yaml",
         "interval": 86400
     };
+    config["rule-providers"]["google"] = {
+        "type": "http",
+        "behavior": "classical",
+        "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google_No_Resolve.yaml",
+        "path": "./ruleset/google.yaml",
+        "interval": 86400
+    };
     config["rule-providers"]["china"] = {
         "type": "http",
         "behavior": "classical",
@@ -142,6 +149,7 @@ function main(config) {
         "RULE-SET,openai," + proxyGroupName,
         "RULE-SET,telegram," + proxyGroupName,
         "RULE-SET,self," + proxyGroupName,
+        "RULE-SET,google," + proxyGroupName,
         "RULE-SET,china,DIRECT",
 
         // 国内
