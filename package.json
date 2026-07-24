@@ -1,0 +1,24 @@
+{
+  "name": "clash-rule",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+"scripts": {
+       "build": "rm -rf dist && vite build",
+        "dev": "vite build --watch"
+   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.15.0",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "vite": "^8.1.5"
+  }
+}
