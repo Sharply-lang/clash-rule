@@ -1,5 +1,5 @@
 // 节点过滤关键词
-const filterNames = ['更新', '邀请', '客户端', '一元', 'yiyuanjichang', '感谢', '重置', '剩余', '到期', '导航', '网址'];
+const filterNames = ['更新', '邀请', '客户端', '感谢', '重置', '剩余', '到期', '导航', '网址'];
 /**
  * 过滤代理节点，移除包含特定关键词的节点
  * @param {Object} config - Clash 配置对象
@@ -7,7 +7,15 @@ const filterNames = ['更新', '邀请', '客户端', '一元', 'yiyuanjichang',
  */
 export function filterNodes(config) {
     config.proxies = config.proxies.filter(
-        p => !filterNames.some(keyword => p.name.includes(keyword))
+        (p) => {
+            // 过滤127.0.0.1
+            const server = p.server ? p.server : "127.0.0.1"
+            if ("127.0.0.1" == server) {
+                return false
+            }
+
+            return !filterNames.some(keyword => p.name.includes(keyword))
+        }
     );
     return config;
 }

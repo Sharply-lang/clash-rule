@@ -3,8 +3,6 @@ var filterNames = [
 	"更新",
 	"邀请",
 	"客户端",
-	"一元",
-	"yiyuanjichang",
 	"感谢",
 	"重置",
 	"剩余",
@@ -18,7 +16,10 @@ var filterNames = [
 * @returns {Object} 修改后的配置
 */
 function filterNodes(config) {
-	config.proxies = config.proxies.filter((p) => !filterNames.some((keyword) => p.name.includes(keyword)));
+	config.proxies = config.proxies.filter((p) => {
+		if ("127.0.0.1" == (p.server ? p.server : "127.0.0.1")) return false;
+		return !filterNames.some((keyword) => p.name.includes(keyword));
+	});
 	return config;
 }
 /**
