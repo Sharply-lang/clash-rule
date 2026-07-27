@@ -6,7 +6,7 @@ const filterNames = ['更新', '邀请', '客户端', '感谢', '重置', '剩�
  * @returns {Object} 修改后的配置
  */
 export function filterNodes(config) {
-    config.proxies = config.proxies.filter(
+    config.proxies = (config.proxies || []).filter(
         (p) => {
             // 过滤127.0.0.1
             const server = p.server ? p.server : "127.0.0.1"
@@ -40,7 +40,7 @@ export function getAllProxyProviders(config) {
  */
 export function setupProxyGroups(config) {
     const proxyGroupName = getProxyGroupName();
-    const proxies = config.proxies.map(p => p.name);
+    const proxies = (config.proxies || []).map(p => p.name);
     const providerNames = getAllProxyProviders(config);
 
     config["proxy-groups"] = [
