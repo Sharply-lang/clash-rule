@@ -29,6 +29,14 @@ function getProxyGroupName() {
 	return "自动选择";
 }
 /**
+* 获取所有 proxy-provider 名称
+* @param {Object} config - Clash 配置对象
+* @returns {string[]} proxy-provider 键名数组
+*/
+function getAllProxyProviders(config) {
+	return Object.keys(config["proxy-providers"] || {});
+}
+/**
 * 设置代理分组
 * @param {Object} config - Clash 配置对象
 * @returns {Object} 修改后的配置
@@ -36,6 +44,7 @@ function getProxyGroupName() {
 function setupProxyGroups(config) {
 	const proxyGroupName = getProxyGroupName();
 	const proxies = config.proxies.map((p) => p.name);
+	const providerNames = getAllProxyProviders(config);
 	config["proxy-groups"] = [
 		{
 			name: "手动选择",
@@ -47,28 +56,32 @@ function setupProxyGroups(config) {
 				"fallback",
 				"REJECT",
 				"DIRECT"
-			]
+			],
+			...providerNames.length && { use: providerNames }
 		},
 		{
 			name: proxyGroupName,
 			type: "url-test",
 			proxies,
 			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
-			interval: 86400
+			interval: 86400,
+			...providerNames.length && { use: providerNames }
 		},
 		{
 			name: "负载均衡",
 			type: "load-balance",
 			proxies,
 			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
-			interval: 86400
+			interval: 86400,
+			...providerNames.length && { use: providerNames }
 		},
 		{
 			name: "fallback",
 			type: "fallback",
 			proxies,
 			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
-			interval: 86400
+			interval: 86400,
+			...providerNames.length && { use: providerNames }
 		},
 		{
 			name: "GLOBAL",
@@ -79,7 +92,8 @@ function setupProxyGroups(config) {
 				"负载均衡",
 				"fallback",
 				"DIRECT"
-			]
+			],
+			...providerNames.length && { use: providerNames }
 		}
 	];
 	return config;
