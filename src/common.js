@@ -220,7 +220,7 @@ export function addRuleProviders(config) {
         "type": "http",
         "behavior": "classical",
         "url": "https://cdn.jsdelivr.net/gh/Sharply-lang/clash-rule@master/rule-providers/self.yaml",
-        "path": "./ruleset/china.yaml",
+        "path": "./ruleset/self.yaml",
         "interval": 86400
     };
 
