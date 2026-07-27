@@ -16,7 +16,7 @@ var filterNames = [
 * @returns {Object} 修改后的配置
 */
 function filterNodes(config) {
-	config.proxies = config.proxies.filter((p) => {
+	config.proxies = (config.proxies || []).filter((p) => {
 		if ("127.0.0.1" == (p.server ? p.server : "127.0.0.1")) return false;
 		return !filterNames.some((keyword) => p.name.includes(keyword));
 	});
@@ -43,7 +43,7 @@ function getAllProxyProviders(config) {
 */
 function setupProxyGroups(config) {
 	const proxyGroupName = getProxyGroupName();
-	const proxies = config.proxies.map((p) => p.name);
+	const proxies = (config.proxies || []).map((p) => p.name);
 	const providerNames = getAllProxyProviders(config);
 	config["proxy-groups"] = [
 		{
