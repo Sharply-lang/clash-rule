@@ -26,6 +26,14 @@ export function getProxyGroupName() {
     return "自动选择";
 }
 /**
+ * 获取所有 proxy-provider 名称
+ * @param {Object} config - Clash 配置对象
+ * @returns {string[]} proxy-provider 键名数组
+ */
+export function getAllProxyProviders(config) {
+    return Object.keys(config["proxy-providers"] || {});
+}
+/**
  * 设置代理分组
  * @param {Object} config - Clash 配置对象
  * @returns {Object} 修改后的配置
@@ -33,12 +41,14 @@ export function getProxyGroupName() {
 export function setupProxyGroups(config) {
     const proxyGroupName = getProxyGroupName();
     const proxies = config.proxies.map(p => p.name);
+    const providerNames = getAllProxyProviders(config);
 
     config["proxy-groups"] = [
         {
             name: "手动选择",
             type: "select",
             proxies: [proxyGroupName, ...proxies, "负载均衡", "fallback", "REJECT", "DIRECT"],
+            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: proxyGroupName,
@@ -46,6 +56,7 @@ export function setupProxyGroups(config) {
             proxies: proxies,
             url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
             interval: 86400,
+            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "负载均衡",
@@ -53,6 +64,7 @@ export function setupProxyGroups(config) {
             proxies: proxies,
             url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
             interval: 86400,
+            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "fallback",
@@ -60,11 +72,13 @@ export function setupProxyGroups(config) {
             proxies: proxies,
             url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
             interval: 86400,
+            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "GLOBAL",
             type: "select",
             proxies: [proxyGroupName, ...proxies, "负载均衡", "fallback", "DIRECT"],
+            ...(providerNames.length && { use: providerNames }),
         },
     ];
 
