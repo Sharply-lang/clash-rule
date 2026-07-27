@@ -330,4 +330,3 @@ function main(config) {
 	return config;
 }
 //#endregion
-export { main };
