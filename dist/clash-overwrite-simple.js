@@ -315,9 +315,6 @@ function setupCommonRules(config) {
 	return config;
 }
 //#endregion
-export { setupNetworkSettings as a, setupCommonRules as i, filterNodes as n, setupProfile as o, setupBaseConfig as r, setupProxyGroups as s, addRuleProviders as t };
-
-
 //#region src/clash-overwrite-simple.js
 function main(config) {
 	config = setupCommonRules(config);

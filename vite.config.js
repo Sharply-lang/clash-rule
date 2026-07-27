@@ -40,9 +40,9 @@ function inlineSharedCode() {
             // 删除共享 chunk
             delete bundle[sharedChunk.fileName];
 
-            // 移除 export { ... } 语句（ponytail: 直接复用 entries 数组，不二次遍历 bundle）
+            // 移除所有 export 语句（ponytail: 直接复用 entries 数组，不二次遍历 bundle）
             for (const { chunk } of entries) {
-                chunk.code = chunk.code.replace(/export\s*\{[^}]*\}\s*;?\s*$/, '');
+                chunk.code = chunk.code.replace(/export\s*\{[^}]*\}\s*;?\s*/g, '');
             }
         },
     };
