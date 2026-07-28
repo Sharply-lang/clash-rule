@@ -111,6 +111,13 @@ export function setupNetworkSettings(config) {
         "fake-ip-filter": [
             "*.lan", "*.local", "*.localhost",
             "dns.msftncsi.com", "www.msftncsi.com", "www.msftconnecttest.com",
+            // 支付宝 / 阿里系
+            "+.alipay.com", "+.alipayobjects.com", "+.alipaysec.com",
+            "+.taobao.com", "+.tmall.com", "+.alicdn.com", "+.aliyun.com",
+            // 微信
+            "+.weixin.qq.com", "+.qq.com",
+            // 常用国内
+            "+.163.com", "+.126.net", "+.jd.com",
         ],
         nameserver: [
             "https://dns.google/dns-query",
@@ -327,6 +334,22 @@ export function setupCommonRules(config) {
         "DOMAIN,gist.github.com," + proxyGroupName,
         "DOMAIN,raw.githubusercontent.com," + proxyGroupName,
         "DOMAIN,api.github.com," + proxyGroupName,
+
+        // -- 支付宝 / 阿里系 --
+        "DOMAIN-SUFFIX,alipay.com,DIRECT",
+        "DOMAIN-SUFFIX,alipayobjects.com,DIRECT",
+        "DOMAIN-SUFFIX,alipaysec.com,DIRECT",
+        "DOMAIN-SUFFIX,alipayun.com,DIRECT",
+        "DOMAIN-SUFFIX,alipaycloud.com,DIRECT",
+        "DOMAIN-SUFFIX,antfin.com,DIRECT",
+        "DOMAIN-SUFFIX,antgroup.com,DIRECT",
+        "DOMAIN-SUFFIX,alicdn.com,DIRECT",
+        "DOMAIN-SUFFIX,aliyun.com,DIRECT",
+        "DOMAIN-SUFFIX,taobao.com,DIRECT",
+        "DOMAIN-SUFFIX,tmall.com,DIRECT",
+        "DOMAIN-SUFFIX,tmall.hk,DIRECT",
+        "DOMAIN-SUFFIX,1688.com,DIRECT",
+        "DOMAIN-SUFFIX,mmstat.com,DIRECT",
 
         // 国内
         'DOMAIN-SUFFIX,cn,DIRECT',
