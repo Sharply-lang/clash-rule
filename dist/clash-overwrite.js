@@ -10,6 +10,7 @@ var filterNames = [
 	"导航",
 	"网址"
 ];
+var testUrl = "http://www.gstatic.com/generate_204";
 /**
 * 过滤代理节点，移除包含特定关键词的节点
 * @param {Object} config - Clash 配置对象
