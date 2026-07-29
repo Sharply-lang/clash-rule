@@ -63,7 +63,7 @@ function setupProxyGroups(config) {
 			name: proxyGroupName,
 			type: "url-test",
 			proxies,
-			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+			url: testUrl,
 			interval: 86400,
 			...providerNames.length && { use: providerNames }
 		},
@@ -71,7 +71,7 @@ function setupProxyGroups(config) {
 			name: "负载均衡",
 			type: "load-balance",
 			proxies,
-			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+			url: testUrl,
 			interval: 86400,
 			...providerNames.length && { use: providerNames }
 		},
@@ -79,7 +79,7 @@ function setupProxyGroups(config) {
 			name: "fallback",
 			type: "fallback",
 			proxies,
-			url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+			url: testUrl,
 			interval: 86400,
 			...providerNames.length && { use: providerNames }
 		},

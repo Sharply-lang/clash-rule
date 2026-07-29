@@ -1,5 +1,6 @@
 // 节点过滤关键词
 const filterNames = ['更新', '邀请', '客户端', '感谢', '重置', '剩余', '到期', '导航', '网址'];
+const testUrl = "http://www.gstatic.com/generate_204"
 /**
  * 过滤代理节点，移除包含特定关键词的节点
  * @param {Object} config - Clash 配置对象
@@ -54,7 +55,7 @@ export function setupProxyGroups(config) {
             name: proxyGroupName,
             type: "url-test",
             proxies: proxies,
-            url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+            url: testUrl,
             interval: 86400,
             ...(providerNames.length && { use: providerNames }),
         },
@@ -62,7 +63,7 @@ export function setupProxyGroups(config) {
             name: "负载均衡",
             type: "load-balance",
             proxies: proxies,
-            url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+            url: testUrl,
             interval: 86400,
             ...(providerNames.length && { use: providerNames }),
         },
@@ -70,7 +71,7 @@ export function setupProxyGroups(config) {
             name: "fallback",
             type: "fallback",
             proxies: proxies,
-            url: "http://maps.googleapis.com/maps/api/mapsjs/gen_204",
+            url: testUrl,
             interval: 86400,
             ...(providerNames.length && { use: providerNames }),
         },
