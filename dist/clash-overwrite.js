@@ -213,35 +213,30 @@ function addRuleProviders(config) {
 		"action": "REJECT",
 		"behavior": "domain",
 		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
-		"path": "./ruleset/reject.yaml",
 		"interval": 86400
 	};
 	ruleSets["gemini"] = {
 		"type": "http",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml",
-		"path": "./ruleset/gemini.yaml",
 		"interval": 86400
 	};
 	ruleSets["openai"] = {
 		"type": "http",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
-		"path": "./ruleset/openai.yaml",
 		"interval": 86400
 	};
 	ruleSets["telegram"] = {
 		"type": "http",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram_No_Resolve.yaml",
-		"path": "./ruleset/telegram.yaml",
 		"interval": 86400
 	};
 	ruleSets["google"] = {
 		"type": "http",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google_No_Resolve.yaml",
-		"path": "./ruleset/google.yaml",
 		"interval": 86400
 	};
 	ruleSets["china"] = {
@@ -249,14 +244,18 @@ function addRuleProviders(config) {
 		"action": "DIRECT",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml",
-		"path": "./ruleset/china.yaml",
 		"interval": 86400
 	};
 	ruleSets["self"] = {
 		"type": "http",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/Sharply-lang/clash-rule@master/rule-providers/self.yaml",
-		"path": "./ruleset/self.yaml",
+		"interval": 86400
+	};
+	ruleSets["meta"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml",
 		"interval": 86400
 	};
 	config["rule-providers"] = config["rule-providers"] || {};
