@@ -202,6 +202,12 @@ function setupProfile(config) {
 	return config;
 }
 /**
+* ruleprovider 保存位置
+* */
+function ruleProvidersPath(url) {
+	return `./ruleset/${url.split("/").pop().split(".")[0] + ".yaml"}`;
+}
+/**
 * 在 rules 最前面添加 RULE-SET 规则
 * @param {Object} config - Clash 配置对象
 * @returns {Object} 修改后的配置
@@ -209,13 +215,6 @@ function setupProfile(config) {
 function addRuleProviders(config) {
 	const proxyGroupName = getProxyGroupName();
 	let ruleSets = {};
-	ruleSets["reject"] = {
-		"type": "http",
-		"action": "REJECT",
-		"behavior": "domain",
-		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
-		"interval": 86400
-	};
 	ruleSets["gemini"] = {
 		"type": "http",
 		"behavior": "classical",
@@ -240,11 +239,24 @@ function addRuleProviders(config) {
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google_No_Resolve.yaml",
 		"interval": 86400
 	};
+	ruleSets["meta"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml",
+		"interval": 86400
+	};
 	ruleSets["china"] = {
 		"type": "http",
 		"action": "DIRECT",
 		"behavior": "classical",
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml",
+		"interval": 86400
+	};
+	ruleSets["reject"] = {
+		"type": "http",
+		"action": "REJECT",
+		"behavior": "domain",
+		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
 		"interval": 86400
 	};
 	ruleSets["self"] = {
@@ -253,17 +265,12 @@ function addRuleProviders(config) {
 		"url": "https://cdn.jsdelivr.net/gh/Sharply-lang/clash-rule@master/rule-providers/self.yaml",
 		"interval": 86400
 	};
-	ruleSets["meta"] = {
-		"type": "http",
-		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml",
-		"interval": 86400
-	};
 	config["rule-providers"] = config["rule-providers"] || {};
 	for (let name of Object.keys(ruleSets)) {
 		let v = ruleSets[name];
 		let action = v["action"] ? v["action"] : proxyGroupName;
 		delete v["action"];
+		v["path"] = ruleProvidersPath(v["url"]);
 		config["rule-providers"][name] = v;
 		config["rules"].unshift(`RULE-SET,${name},${action}`);
 	}
