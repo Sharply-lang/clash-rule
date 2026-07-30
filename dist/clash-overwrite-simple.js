@@ -237,6 +237,7 @@ function addRuleProviders(config) {
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml"
 	};
 	ruleSets["reject"] = {
+		"disable": true,
 		"type": "http",
 		"action": "REJECT",
 		"behavior": "domain",
@@ -250,6 +251,7 @@ function addRuleProviders(config) {
 	config["rule-providers"] = config["rule-providers"] || {};
 	for (let name of Object.keys(ruleSets)) {
 		let v = ruleSets[name];
+		if (v["disable"] != void 0 && v["disable"] == true) continue;
 		let action = v["action"] ? v["action"] : proxyGroupName;
 		delete v["action"];
 		v["path"] = ruleProvidersPath(v["url"]);
