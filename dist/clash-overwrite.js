@@ -342,7 +342,6 @@ function setupCommonRules(config) {
 		"DOMAIN-SUFFIX,mmstat.com,DIRECT",
 		"DOMAIN-SUFFIX,cn,DIRECT",
 		"DOMAIN-KEYWORD,-cn,DIRECT",
-		"GEOIP,CN,DIRECT,no-resolve",
 		"MATCH,手动选择"
 	];
 	return config;

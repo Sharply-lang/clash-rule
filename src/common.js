@@ -362,7 +362,7 @@ export function setupCommonRules(config) {
         // 国内
         'DOMAIN-SUFFIX,cn,DIRECT',
         'DOMAIN-KEYWORD,-cn,DIRECT',
-        'GEOIP,CN,DIRECT,no-resolve',
+        // 'GEOIP,CN,DIRECT,no-resolve',
 
         // -- 全局直连 --
         "MATCH,手动选择",
