@@ -1,16 +1,6 @@
 //#region src/common.js
-var filterNames = [
-	"更新",
-	"邀请",
-	"客户端",
-	"感谢",
-	"重置",
-	"剩余",
-	"到期",
-	"导航",
-	"网址"
-];
-var testUrl = "http://www.gstatic.com/generate_204";
+var filterNames = ["网址"];
+var testUrl = "http://maps.googleapis.com/maps/api/mapsjs/gen_204";
 /**
 * 过滤代理节点，移除包含特定关键词的节点
 * @param {Object} config - Clash 配置对象
@@ -218,52 +208,44 @@ function addRuleProviders(config) {
 	ruleSets["gemini"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/BardAI/BardAI.yaml"
 	};
 	ruleSets["openai"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml"
 	};
 	ruleSets["telegram"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram_No_Resolve.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram_No_Resolve.yaml"
 	};
 	ruleSets["google"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google_No_Resolve.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google_No_Resolve.yaml"
 	};
 	ruleSets["meta"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
 	};
 	ruleSets["china"] = {
 		"type": "http",
 		"action": "DIRECT",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax_Classical_No_IPv6_No_Resolve.yaml"
 	};
 	ruleSets["reject"] = {
 		"type": "http",
 		"action": "REJECT",
 		"behavior": "domain",
-		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
 	};
 	ruleSets["self"] = {
 		"type": "http",
 		"behavior": "classical",
-		"url": "https://cdn.jsdelivr.net/gh/Sharply-lang/clash-rule@master/rule-providers/self.yaml",
-		"interval": 86400
+		"url": "https://cdn.jsdelivr.net/gh/Sharply-lang/clash-rule@master/rule-providers/self.yaml"
 	};
 	config["rule-providers"] = config["rule-providers"] || {};
 	for (let name of Object.keys(ruleSets)) {
@@ -271,6 +253,7 @@ function addRuleProviders(config) {
 		let action = v["action"] ? v["action"] : proxyGroupName;
 		delete v["action"];
 		v["path"] = ruleProvidersPath(v["url"]);
+		v["interval"] = 86400;
 		config["rule-providers"][name] = v;
 		config["rules"].unshift(`RULE-SET,${name},${action}`);
 	}
