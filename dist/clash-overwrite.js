@@ -231,6 +231,7 @@ function addRuleProviders(config) {
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
 	};
 	ruleSets["china"] = {
+		"disable": true,
 		"type": "http",
 		"action": "DIRECT",
 		"behavior": "classical",
