@@ -1,5 +1,5 @@
 // 节点过滤关键词
-const filterNames = ['网址'];
+const filterNames = ['网址', '香港', '台湾'];
 const testUrl = "http://maps.googleapis.com/maps/api/mapsjs/gen_204"
 //const testUrl = "http://www.gstatic.com/generate_204"
 /**

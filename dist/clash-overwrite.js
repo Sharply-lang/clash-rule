@@ -1,5 +1,9 @@
 //#region src/common.js
-var filterNames = ["网址"];
+var filterNames = [
+	"网址",
+	"香港",
+	"台湾"
+];
 var testUrl = "http://maps.googleapis.com/maps/api/mapsjs/gen_204";
 /**
 * 过滤代理节点，移除包含特定关键词的节点
