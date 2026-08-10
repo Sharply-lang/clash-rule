@@ -203,6 +203,11 @@ export function addRuleProviders(config) {
     const proxyGroupName = getProxyGroupName();
     let ruleSets = {}
 
+    ruleSets["discord"] = {
+        "type": "http",
+        "behavior": "classical",
+        "url": "https://fastly.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Discord/Discord.yaml",
+    };
     ruleSets["gemini"] = {
         "type": "http",
         "behavior": "classical",
