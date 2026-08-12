@@ -243,16 +243,6 @@ export function addRuleProviders(config) {
         "behavior": "classical",
         "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml",
     };
-    ruleSets[""] = {
-        "type": "http",
-        "behavior": "classical",
-        "url": "",
-    };
-    ruleSets[""] = {
-        "type": "http",
-        "behavior": "classical",
-        "url": "",
-    };
     ruleSets["slack"] = {
         "type": "http",
         "behavior": "classical",
