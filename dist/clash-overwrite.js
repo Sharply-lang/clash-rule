@@ -45,12 +45,12 @@ function setupProxyGroups(config) {
 			name: "手动选择",
 			type: "select",
 			proxies: [
+				"DIRECT",
 				proxyGroupName,
 				...proxies,
 				"负载均衡",
 				"fallback",
-				"REJECT",
-				"DIRECT"
+				"REJECT"
 			],
 			...providerNames.length && { use: providerNames }
 		},
@@ -209,6 +209,113 @@ function ruleProvidersPath(url) {
 function addRuleProviders(config) {
 	const proxyGroupName = getProxyGroupName();
 	let ruleSets = {};
+	ruleSets["apkcombo"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/APKCombo/APKCombo.yaml"
+	};
+	ruleSets["alibaba"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Alibaba/Alibaba_Classical.yaml"
+	};
+	ruleSets["apkpure"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apkpure/Apkpure.yaml"
+	};
+	ruleSets["cloudflare"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml"
+	};
+	ruleSets["instagram"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Instagram/Instagram.yaml"
+	};
+	ruleSets["pixiv"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pixiv/Pixiv.yaml"
+	};
+	ruleSets["pixnet"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Pixnet/Pixnet.yaml"
+	};
+	ruleSets["reddit"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Reddit/Reddit.yaml"
+	};
+	ruleSets[""] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": ""
+	};
+	ruleSets[""] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": ""
+	};
+	ruleSets["slack"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Slack/Slack.yaml"
+	};
+	ruleSets["telegram"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml"
+	};
+	ruleSets["telegramnl"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TelegramNL/TelegramNL.yaml"
+	};
+	ruleSets["telegramsg"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TelegramSG/TelegramSG.yaml"
+	};
+	ruleSets["telegramus"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TelegramUS/TelegramUS.yaml"
+	};
+	ruleSets["threads"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Threads/Threads.yaml"
+	};
+	ruleSets["tiktok"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml"
+	};
+	ruleSets["tumblr"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Tumblr/Tumblr.yaml"
+	};
+	ruleSets["whatsapp"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Whatsapp/Whatsapp.yaml"
+	};
+	ruleSets["youtube"] = {
+		"type": "http",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
+	};
+	ruleSets["alipay"] = {
+		"disable": false,
+		"type": "http",
+		"action": "DIRECT",
+		"behavior": "classical",
+		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AliPay/AliPay.yaml"
+	};
 	ruleSets["discord"] = {
 		"type": "http",
 		"behavior": "classical",
@@ -240,7 +347,7 @@ function addRuleProviders(config) {
 		"url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Facebook/Facebook.yaml"
 	};
 	ruleSets["china"] = {
-		"disable": true,
+		"disable": false,
 		"type": "http",
 		"action": "DIRECT",
 		"behavior": "classical",
