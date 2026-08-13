@@ -218,11 +218,6 @@ export function addRuleProviders(config) {
         "behavior": "classical",
         "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apkpure/Apkpure.yaml",
     };
-    ruleSets["cloudflare"] = {
-        "type": "http",
-        "behavior": "classical",
-        "url": "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml",
-    };
     ruleSets["instagram"] = {
         "type": "http",
         "behavior": "classical",
