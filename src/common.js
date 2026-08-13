@@ -431,14 +431,15 @@ export function setupCommonRules(config) {
         "DOMAIN-KEYWORD,instagram," + proxyGroupName,
 
         // -- GitHub --
-        "DOMAIN-SUFFIX,github.com," + proxyGroupName,
-        "DOMAIN-SUFFIX,github.io," + proxyGroupName,
-        "DOMAIN-SUFFIX,githubapp.com," + proxyGroupName,
-        "DOMAIN-SUFFIX,githubusercontent.com," + proxyGroupName,
-        "DOMAIN-SUFFIX,githubassets.com," + proxyGroupName,
-        "DOMAIN,gist.github.com," + proxyGroupName,
-        "DOMAIN,raw.githubusercontent.com," + proxyGroupName,
-        "DOMAIN,api.github.com," + proxyGroupName,
+        // github不设置代理,访问不了时在浏览器处理
+        //"DOMAIN-SUFFIX,github.com," + proxyGroupName,
+        //"DOMAIN-SUFFIX,github.io," + proxyGroupName,
+        //"DOMAIN-SUFFIX,githubapp.com," + proxyGroupName,
+        //"DOMAIN-SUFFIX,githubusercontent.com," + proxyGroupName,
+        //"DOMAIN-SUFFIX,githubassets.com," + proxyGroupName,
+        //"DOMAIN,gist.github.com," + proxyGroupName,
+        //"DOMAIN,raw.githubusercontent.com," + proxyGroupName,
+        //"DOMAIN,api.github.com," + proxyGroupName,
 
         // -- 支付宝 / 阿里系 --
         "DOMAIN-SUFFIX,alipay.com,DIRECT",
