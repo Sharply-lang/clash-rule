@@ -1,9 +1,5 @@
 //#region src/common.js
-var filterNames = [
-	"网址",
-	"香港",
-	"台湾"
-];
+var filterNames = [];
 var testUrl = "http://maps.googleapis.com/maps/api/mapsjs/gen_204";
 /**
 * 过滤代理节点，移除包含特定关键词的节点
@@ -24,73 +20,50 @@ function getProxyGroupName() {
 	return "自动选择";
 }
 /**
-* 获取所有 proxy-provider 名称
-* @param {Object} config - Clash 配置对象
-* @returns {string[]} proxy-provider 键名数组
-*/
-function getAllProxyProviders(config) {
-	return Object.keys(config["proxy-providers"] || {});
-}
-/**
 * 设置代理分组
 * @param {Object} config - Clash 配置对象
 * @returns {Object} 修改后的配置
 */
 function setupProxyGroups(config) {
 	const proxyGroupName = getProxyGroupName();
-	const proxies = (config.proxies || []).map((p) => p.name);
-	const providerNames = getAllProxyProviders(config);
-	config["proxy-groups"] = [
+	config["proxy-groups"] = [];
+	const groups = [
 		{
 			name: "手动选择",
 			type: "select",
 			proxies: [
 				"DIRECT",
 				proxyGroupName,
-				...proxies,
 				"负载均衡",
 				"fallback",
 				"REJECT"
-			],
-			...providerNames.length && { use: providerNames }
+			]
 		},
 		{
 			name: proxyGroupName,
-			type: "url-test",
-			proxies,
-			url: testUrl,
-			interval: 86400,
-			...providerNames.length && { use: providerNames }
+			type: "url-test"
 		},
 		{
 			name: "负载均衡",
-			type: "load-balance",
-			proxies,
-			url: testUrl,
-			interval: 86400,
-			...providerNames.length && { use: providerNames }
+			type: "load-balance"
 		},
 		{
 			name: "fallback",
-			type: "fallback",
-			proxies,
-			url: testUrl,
-			interval: 86400,
-			...providerNames.length && { use: providerNames }
+			type: "fallback"
 		},
 		{
 			name: "GLOBAL",
-			type: "select",
-			proxies: [
-				proxyGroupName,
-				...proxies,
-				"负载均衡",
-				"fallback",
-				"DIRECT"
-			],
-			...providerNames.length && { use: providerNames }
+			type: "select"
 		}
 	];
+	for (let item of groups) {
+		item["url"] = testUrl;
+		item["interval"] = 0;
+		item["disable-udp"] = false;
+		item["include-all"] = true;
+		item["proxies"] = item["proxies"] || [];
+		config["proxy-groups"].push(item);
+	}
 	return config;
 }
 /**
@@ -435,6 +408,7 @@ function setupCommonRules(config) {
 		"DOMAIN-SUFFIX,mmstat.com,DIRECT",
 		"DOMAIN-SUFFIX,cn,DIRECT",
 		"DOMAIN-KEYWORD,-cn,DIRECT",
+		"GEOIP,CN,DIRECT,no-resolve",
 		"MATCH,手动选择"
 	];
 	return config;

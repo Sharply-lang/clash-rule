@@ -1,7 +1,7 @@
 // 节点过滤关键词
-const filterNames = ['网址', '香港', '台湾'];
+const filterNames = [];
 const testUrl = "http://maps.googleapis.com/maps/api/mapsjs/gen_204"
-//const testUrl = "http://www.gstatic.com/generate_204"
+
 /**
  * 过滤代理节点，移除包含特定关键词的节点
  * @param {Object} config - Clash 配置对象
@@ -21,19 +21,13 @@ export function filterNodes(config) {
     );
     return config;
 }
+
+//const testUrl = "http://www.gstatic.com/generate_204"
 /**
  * 获取自动选择分组名称
  */
 export function getProxyGroupName() {
     return "自动选择";
-}
-/**
- * 获取所有 proxy-provider 名称
- * @param {Object} config - Clash 配置对象
- * @returns {string[]} proxy-provider 键名数组
- */
-export function getAllProxyProviders(config) {
-    return Object.keys(config["proxy-providers"] || {});
 }
 /**
  * 设置代理分组
@@ -42,47 +36,39 @@ export function getAllProxyProviders(config) {
  */
 export function setupProxyGroups(config) {
     const proxyGroupName = getProxyGroupName();
-    const proxies = (config.proxies || []).map(p => p.name);
-    const providerNames = getAllProxyProviders(config);
+    config['proxy-groups'] = []
 
-    config["proxy-groups"] = [
+    const groups = [
         {
             name: "手动选择",
             type: "select",
-            proxies: ["DIRECT", proxyGroupName, ...proxies, "负载均衡", "fallback", "REJECT"],
-            ...(providerNames.length && { use: providerNames }),
+            proxies: ["DIRECT", proxyGroupName, "负载均衡", "fallback", "REJECT"],
         },
         {
             name: proxyGroupName,
             type: "url-test",
-            proxies: proxies,
-            url: testUrl,
-            interval: 86400,
-            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "负载均衡",
             type: "load-balance",
-            proxies: proxies,
-            url: testUrl,
-            interval: 86400,
-            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "fallback",
             type: "fallback",
-            proxies: proxies,
-            url: testUrl,
-            interval: 86400,
-            ...(providerNames.length && { use: providerNames }),
         },
         {
             name: "GLOBAL",
             type: "select",
-            proxies: [proxyGroupName, ...proxies, "负载均衡", "fallback", "DIRECT"],
-            ...(providerNames.length && { use: providerNames }),
         },
     ];
+    for (let item of groups) {
+        item["url"] = testUrl
+        item["interval"] = 0
+        item["disable-udp"] = false
+        item["include-all"] = true
+        item['proxies'] = item['proxies'] || []
+        config['proxy-groups'].push(item)
+    }
 
     return config;
 }
@@ -460,7 +446,7 @@ export function setupCommonRules(config) {
         // 国内
         'DOMAIN-SUFFIX,cn,DIRECT',
         'DOMAIN-KEYWORD,-cn,DIRECT',
-        // 'GEOIP,CN,DIRECT,no-resolve',
+        'GEOIP,CN,DIRECT,no-resolve',
 
         // -- 全局直连 --
         "MATCH,手动选择",
